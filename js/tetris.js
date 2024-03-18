@@ -58,7 +58,7 @@ function renderBlocks() {
         movingBlocks.forEach(block => {
             block.classList.remove(type, "moving")
         })
-        
+
     // tree타입 블록의 direction에는 좌표값 네개가 들어있다.-> 블록이 채워질 좌표들임.
     BLOCKS[type][direction].forEach(block => {
         
@@ -82,6 +82,13 @@ function moveBlock(moveType, amount) {
     renderBlocks()
 }
 
+function changeDirection() {
+    // 엔터를 치면 -> direction을 변경하고, render에 속성을 업데이트해준다.
+}
+
+function checkBorder() {
+    // border 를 체크하고, 만약 border 를 만나면 이동이 불가능하도록 만든다.
+}
 
 document.addEventListener("keydown", e => {
     switch(e.keyCode) {
@@ -90,6 +97,8 @@ document.addEventListener("keydown", e => {
             break;
         case 37:
             moveBlock("left", -1);
+        case 40 :
+            moveBlock("top", 1);
     }
 })
 
