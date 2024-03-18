@@ -54,17 +54,25 @@ function renderBlocks() {
     // 디스트럭쳐링 사용 -> tempMovingItem의 프로퍼티들을 변수로 하나씩 바로 사용할 수 있도록 한다. 
     // tempMovingItem.type , tempMovingItem.direction , .. 과 같은 접근이다.
     
-    
-    // tree타입 블록의 direction에는 좌표값 네개가 들어있다.-> 블록이 채워질 좌표들임.\
+    const movingBlocks = document.querySelectorAll(".moving")
+        movingBlocks.forEach(block => {
+            block.classList.remove(type, "moving")
+        })
+        
+    // tree타입 블록의 direction에는 좌표값 네개가 들어있다.-> 블록이 채워질 좌표들임.
     BLOCKS[type][direction].forEach(block => {
+        
+        
+        
         const x = block[0] + left;        
         const y = block[1] + top;
         const playground = document.querySelector(".playground > ul");
-        const target = playground.childNodes[y].childNodes[0].childNodes[x]
+        target = playground.childNodes[y].childNodes[0].childNodes[x]
         console.log(target)
         // 배열처럼 foreach나 sum 과 같은 배열 함수를 사용할 수 있는 배열값으로 반환된다.
         // 즉, 좌표값에 해당하는 노드들을 조작할 수 있다는 의미이다.
-        target.classList.add(type);
+        target.classList.add(type, "moving"); 
+        // 각 html 요소들은 클래스를 가질수 있는데, classList.add를 통해 클래스를 추가해줄 수 있다., remove 메서드를 통해 클래스를 제거해올 수 도 있다.
         
     })
 }
@@ -84,3 +92,7 @@ document.addEventListener("keydown", e => {
             moveBlock("left", -1);
     }
 })
+
+/*
+방향키를 통해 움직이는 것 까지는 됐는데, 원래 있던 자리의 클래스들은 어떻게 다시 원상복구를 할 수 있을까? -> 답 알아오기
+*/
